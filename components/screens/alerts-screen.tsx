@@ -2,7 +2,7 @@
 
 import { AlertCard } from "@/components/alert-card";
 import { Card, CardContent } from "@/components/ui/card";
-import { Bell, CheckCircle2, X, Save, RotateCcw } from "lucide-react";
+import { Bell, CheckCircle2, X } from "lucide-react";
 import { IDEAL_RANGES } from "@/lib/mock-data";
 import type { Alert } from "@/lib/mock-data";
 

@@ -16,7 +16,7 @@ export default function HabitatMonitor() {
   const [visibleAlerts, setVisibleAlerts] = useState<Alert[]>(initialAlerts);
 
   const warningCount = visibleAlerts.filter(
-    (a) => a.type === "warning" || a.type === "danger"
+    (a) => a.type === "warning" || a.type === "danger",
   ).length;
 
   const dismissAlert = useCallback((alertId: string) => {
@@ -31,10 +31,7 @@ export default function HabitatMonitor() {
         {activeTab === "dashboard" && <DashboardScreen />}
         {activeTab === "history" && <HistoryScreen />}
         {activeTab === "alerts" && (
-          <AlertsScreen 
-            alerts={visibleAlerts} 
-            onDismissAlert={dismissAlert} 
-          />
+          <AlertsScreen alerts={visibleAlerts} onDismissAlert={dismissAlert} />
         )}
       </main>
 

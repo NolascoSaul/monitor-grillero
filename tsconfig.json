@@ -5,6 +5,7 @@
       "dom.iterable",
       "esnext"
     ],
+    "forceConsistentCasingInFileNames": true,
     "allowJs": true,
     "target": "ES6",
     "skipLibCheck": true,
