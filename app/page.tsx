@@ -6,10 +6,11 @@ import { BottomNav } from "@/components/bottom-nav";
 import { DashboardScreen } from "@/components/screens/dashboard-screen";
 import { HistoryScreen } from "@/components/screens/history-screen";
 import { AlertsScreen } from "@/components/screens/alerts-screen";
+import { FanScreen } from "@/components/screens/fan-screen";
 import { alerts as initialAlerts } from "@/lib/mock-data";
 import type { Alert } from "@/lib/mock-data";
 
-type Tab = "dashboard" | "history" | "alerts";
+type Tab = "dashboard" | "history" | "fan" | "alerts";
 
 export default function HabitatMonitor() {
   const [activeTab, setActiveTab] = useState<Tab>("dashboard");
@@ -30,6 +31,7 @@ export default function HabitatMonitor() {
       <main className="max-w-md mx-auto px-4 py-4 pb-24">
         {activeTab === "dashboard" && <DashboardScreen />}
         {activeTab === "history" && <HistoryScreen />}
+        {activeTab === "fan" && <FanScreen />}
         {activeTab === "alerts" && (
           <AlertsScreen alerts={visibleAlerts} onDismissAlert={dismissAlert} />
         )}

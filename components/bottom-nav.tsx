@@ -1,9 +1,9 @@
 "use client";
 
-import { Home, BarChart2, Bell } from "lucide-react";
+import { Home, BarChart2, Bell, Fan } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type Tab = "dashboard" | "history" | "alerts";
+type Tab = "dashboard" | "history" | "fan" | "alerts";
 
 interface BottomNavProps {
   activeTab: Tab;
@@ -14,6 +14,7 @@ interface BottomNavProps {
 const navItems = [
   { id: "dashboard" as Tab, label: "Inicio", icon: Home },
   { id: "history" as Tab, label: "Historial", icon: BarChart2 },
+  { id: "fan" as Tab, label: "Ventilación", icon: Fan },
   { id: "alerts" as Tab, label: "Alertas", icon: Bell },
 ];
 
