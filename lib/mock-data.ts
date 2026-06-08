@@ -1,25 +1,5 @@
-// Simulated data for cricket habitat monitoring
-
-export interface HabitatReading {
-  timestamp: Date;
-  temperature: number;
-  humidity: number;
-}
-
-export interface Alert {
-  id: string;
-  type: "warning" | "danger" | "info";
-  title: string;
-  message: string;
-  hoursAgo: number;
-  metric: "temperature" | "humidity" | "general";
-}
-
-// Ideal ranges for crickets
-export const IDEAL_RANGES = {
-  temperature: { min: 24, max: 30, unit: "°C" },
-  humidity: { min: 50, max: 70, unit: "%" },
-};
+import type { HabitatReading, HabitatStatus, Alert } from "@/types/habitat";
+import { IDEAL_RANGES } from "@/constants/ranges";
 
 // Current readings (simulated)
 export const currentReadings = {
@@ -145,8 +125,6 @@ export const alerts: Alert[] = [
   },
 ];
 
-
-export type HabitatStatus = "optimal" | "caution" | "alert";
 // Helper function to determine habitat status
 export function getHabitatStatus(
   temperature: number,

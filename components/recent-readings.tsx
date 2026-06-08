@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Clock, Thermometer, Droplets } from "lucide-react";
-import type { HabitatReading } from "@/lib/mock-data";
+import type { HabitatReading } from "@/types/habitat";
 
 interface RecentReadingsProps {
   readings: HabitatReading[];

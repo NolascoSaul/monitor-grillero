@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Thermometer, Droplets, TrendingUp, TrendingDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { IDEAL_RANGES } from "@/lib/mock-data";
+import { IDEAL_RANGES } from "@/constants/ranges";
 
 interface MetricCardProps {
   title: string;

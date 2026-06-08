@@ -3,8 +3,8 @@
 import { AlertCard } from "@/components/alert-card";
 import { Card, CardContent } from "@/components/ui/card";
 import { Bell, CheckCircle2, X } from "lucide-react";
-import { IDEAL_RANGES } from "@/lib/mock-data";
-import type { Alert } from "@/lib/mock-data";
+import { IDEAL_RANGES } from "@/constants/ranges";
+import type { Alert } from "@/types/habitat";
 
 interface AlertsScreenProps {
   alerts: Alert[];

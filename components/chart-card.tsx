@@ -13,8 +13,8 @@ import {
 } from "recharts";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import type { HabitatReading } from "@/lib/mock-data";
-import { IDEAL_RANGES } from "@/lib/mock-data";
+import type { HabitatReading } from "@/types/habitat";
+import { IDEAL_RANGES } from "@/constants/ranges";
 
 interface ChartCardProps {
   title: string;

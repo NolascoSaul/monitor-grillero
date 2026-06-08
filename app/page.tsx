@@ -3,10 +3,10 @@
 import { useState, useCallback } from "react";
 import { AppHeader } from "@/components/app-header";
 import { BottomNav } from "@/components/bottom-nav";
-import { DashboardScreen } from "@/components/screens/dashboard-screen";
-import { HistoryScreen } from "@/components/screens/history-screen";
-import { AlertsScreen } from "@/components/screens/alerts-screen";
-import { FanScreen } from "@/components/screens/fan-screen";
+import { DashboardScreen } from "@/screens/dashboard-screen";
+import { HistoryScreen } from "@/screens/history-screen";
+import { AlertsScreen } from "@/screens/alerts-screen";
+import { FanScreen } from "@/screens/fan-screen";
 import { alerts as initialAlerts } from "@/lib/mock-data";
 import type { Alert } from "@/lib/mock-data";
 

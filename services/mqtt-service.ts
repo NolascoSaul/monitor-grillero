@@ -33,14 +33,3 @@ export const sendFanCommand = (fanOn: boolean) => {
     if (!client) connectMQTT();
     client?.publish("fan/control", fanOn ? "on" : "off");
 };
-
-export const subscribeToFanStatus = (callback: (state: string) => void) => {
-    if (!client) connectMQTT();
-    client?.subscribe("fan/status");
-    client?.on("message", (topic, message) => {
-        if (topic === "fan/status") {
-            const data = JSON.parse(message.toString());
-            callback(data.state);
-        }
-    });
-};

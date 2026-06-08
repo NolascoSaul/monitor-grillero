@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle2, AlertTriangle, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { HabitatStatus } from "@/lib/mock-data";
+import type { HabitatStatus } from "@/types/habitat";
 
 interface StatusCardProps {
   status: HabitatStatus;
