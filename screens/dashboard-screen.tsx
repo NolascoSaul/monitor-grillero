@@ -3,41 +3,50 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { MetricCard } from "@/components/metric-card";
 import { StatusCard } from "@/components/status-card";
-import {
-  currentReadings,
-  getHabitatStatus,
-  historicalData,
-} from "@/lib/mock-data";
+import { useRealtimeReadings } from "@/hooks/use-readings";
+import { getHabitatStatus } from "@/lib/helpers";
+import { DashboardSkeleton } from "@/components/skeletons/dashboard-skeleton";
 
 export function DashboardScreen() {
-  const status = getHabitatStatus(
-    currentReadings.temperature,
-    currentReadings.humidity,
-  );
+  const { readings, isLoading, error } = useRealtimeReadings();
 
-  // Calculate trends from historical data
-  const recentData = historicalData.today.slice(-6);
-  const previousTemp =
-    recentData[0]?.temperature ?? currentReadings.temperature;
-  const previousHumidity = recentData[0]?.humidity ?? currentReadings.humidity;
+  if (isLoading) return <DashboardSkeleton />;
+  if (error) return <div>Error: {error.message}</div>;
+
+  const currentReading = readings[readings.length - 1] ?? {
+    temperature: 0,
+    humidity: 0,
+    timestamp: new Date(),
+  };
+
+  const previousReading = readings[readings.length - 2] ?? currentReading;
+
+  const status = getHabitatStatus(
+    currentReading.temperature,
+    currentReading.humidity,
+  );
 
   const tempTrend =
-    currentReadings.temperature > previousTemp
+    currentReading.temperature > previousReading.temperature
       ? "up"
-      : currentReadings.temperature < previousTemp
-        ? "down"
-        : "stable";
-  const humidityTrend =
-    currentReadings.humidity > previousHumidity
-      ? "up"
-      : currentReadings.humidity < previousHumidity
+      : currentReading.temperature < previousReading.temperature
         ? "down"
         : "stable";
 
-  const tempDiff = Math.abs(currentReadings.temperature - previousTemp).toFixed(
-    1,
+  const humidityTrend =
+    currentReading.humidity > previousReading.humidity
+      ? "up"
+      : currentReading.humidity < previousReading.humidity
+        ? "down"
+        : "stable";
+
+  const tempDiff = Math.abs(
+    currentReading.temperature - previousReading.temperature,
+  ).toFixed(1);
+
+  const humidityDiff = Math.abs(
+    currentReading.humidity - previousReading.humidity,
   );
-  const humidityDiff = Math.abs(currentReadings.humidity - previousHumidity);
 
   return (
     <div className="space-y-4">
@@ -48,7 +57,7 @@ export function DashboardScreen() {
       <div className="grid grid-cols-2 gap-3">
         <MetricCard
           title="Temperatura"
-          value={currentReadings.temperature}
+          value={currentReading.temperature}
           unit="°C"
           type="temperature"
           trend={tempTrend}
@@ -56,7 +65,7 @@ export function DashboardScreen() {
         />
         <MetricCard
           title="Humedad"
-          value={currentReadings.humidity}
+          value={currentReading.humidity}
           unit="%"
           type="humidity"
           trend={humidityTrend}

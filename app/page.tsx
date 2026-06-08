@@ -1,14 +1,14 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { AppHeader } from "@/components/app-header";
-import { BottomNav } from "@/components/bottom-nav";
+import { AppHeader } from "@/components/common/app-header";
+import { BottomNav } from "@/components/common/bottom-nav";
 import { DashboardScreen } from "@/screens/dashboard-screen";
 import { HistoryScreen } from "@/screens/history-screen";
 import { AlertsScreen } from "@/screens/alerts-screen";
 import { FanScreen } from "@/screens/fan-screen";
 import { alerts as initialAlerts } from "@/lib/mock-data";
-import type { Alert } from "@/lib/mock-data";
+import type { Alert } from "@/types/habitat";
 
 type Tab = "dashboard" | "history" | "fan" | "alerts";
 
