@@ -34,7 +34,7 @@ export function RecentReadings({ readings }: RecentReadingsProps) {
                 <div className="flex items-center gap-1">
                   <Thermometer className="h-3.5 w-3.5 text-chart-1" />
                   <span className="text-sm font-medium">
-                    {reading.temperature}C
+                    {reading.temperature}°C
                   </span>
                 </div>
                 <div className="flex items-center gap-1">

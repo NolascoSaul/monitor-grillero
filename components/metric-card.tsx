@@ -43,6 +43,8 @@ export function MetricCard({
   const TrendIcon =
     trend === "up" ? TrendingUp : trend === "down" ? TrendingDown : null;
 
+  const trendColor = trend === "up" ? "text-primary" : "text-destructive";
+
   return (
     <Card
       className={cn(
@@ -76,7 +78,7 @@ export function MetricCard({
           </p>
           {TrendIcon && trendValue && (
             <div className="flex items-center gap-1 text-[10px] sm:text-xs text-muted-foreground">
-              <TrendIcon className="h-3 w-3" />
+              <TrendIcon className={cn("h-3 w-3", trendColor)} />
               <span>{trendValue}</span>
             </div>
           )}

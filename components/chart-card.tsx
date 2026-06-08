@@ -63,10 +63,9 @@ export function ChartCard({
     dataKey === "temperature"
       ? IDEAL_RANGES.temperature
       : IDEAL_RANGES.humidity;
-  const minValue = Math.min(...chartData.map((d) => d.value)) - 5;
-  const maxValue = Math.max(...chartData.map((d) => d.value)) + 5;
+  const minValue = Math.min(...chartData.map((d) => d.value));
+  const maxValue = Math.max(...chartData.map((d) => d.value));
 
-  // Sample data for mobile to avoid overcrowding
   const displayData =
     chartData.length > 8
       ? chartData.filter(

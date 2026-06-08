@@ -8,6 +8,7 @@ import type { HabitatStatus } from "@/types/habitat";
 
 interface StatusCardProps {
   status: HabitatStatus;
+  timestamp: Date;
 }
 
 const statusConfig = {
@@ -37,16 +38,17 @@ const statusConfig = {
   },
 };
 
-export function StatusCard({ status }: StatusCardProps) {
+export function StatusCard({ status, timestamp }: StatusCardProps) {
   const config = statusConfig[status];
   const Icon = config.icon;
   const [currentTime, setCurrentTime] = useState<string | null>(null);
 
   useEffect(() => {
     setCurrentTime(
-      new Date().toLocaleTimeString("es-ES", {
+      timestamp.toLocaleString("es-ES", {
         hour: "2-digit",
         minute: "2-digit",
+        hourCycle: "h24",
       }),
     );
   }, []);
@@ -73,7 +75,7 @@ export function StatusCard({ status }: StatusCardProps) {
           </div>
         </div>
         <p className="mt-4 text-xs text-muted-foreground">
-          Ultima actualización: {currentTime ?? "--:--"}
+          Última actualización: {currentTime ?? "--:--"}
         </p>
       </CardContent>
     </Card>

@@ -2,10 +2,26 @@
 
 import { ChartCard } from "@/components/chart-card";
 import { RecentReadings } from "@/components/recent-readings";
-import { historicalData, getRecentReadings } from "@/lib/mock-data";
+import { ReadingState } from "@/types/firebase";
+import { useRealtimeReadings } from "@/hooks/use-readings";
 
 export function HistoryScreen() {
-  const recentReadings = getRecentReadings();
+  const { readings, isLoading, error }: ReadingState = useRealtimeReadings();
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  const todayReadings = readings.slice(-24);
+  const weekReadings = readings.slice(-7 * 24).filter((_, i) => i % 24 === 0);
+  const monthReadings = readings.slice(-30 * 24).filter((_, i) => i % 24 === 0);
+
+  const historicalData = {
+    today: todayReadings,
+    week: weekReadings,
+    month: monthReadings,
+  };
+
+  const recentReadings = readings.slice(-6).reverse();
 
   return (
     <div className="space-y-4">

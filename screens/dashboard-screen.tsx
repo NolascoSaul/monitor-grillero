@@ -5,6 +5,7 @@ import { MetricCard } from "@/components/metric-card";
 import { StatusCard } from "@/components/status-card";
 import { useRealtimeReadings } from "@/hooks/use-readings";
 import { getHabitatStatus } from "@/lib/helpers";
+import { IDEAL_RANGES } from "@/constants/ranges";
 import { DashboardSkeleton } from "@/components/skeletons/dashboard-skeleton";
 
 export function DashboardScreen() {
@@ -51,7 +52,7 @@ export function DashboardScreen() {
   return (
     <div className="space-y-4">
       {/* Status Card */}
-      <StatusCard status={status} />
+      <StatusCard status={status} timestamp={currentReading.timestamp} />
 
       {/* Metric Cards */}
       <div className="grid grid-cols-2 gap-3">
@@ -80,8 +81,15 @@ export function DashboardScreen() {
             Condiciones ideales para grillos
           </h3>
           <ul className="space-y-1 text-xs text-muted-foreground">
-            <li>Temperatura: 24-30 grados Celsius</li>
-            <li>Humedad: 50-70%</li>
+            <li>
+              Temperatura: {IDEAL_RANGES.temperature.min}-
+              {IDEAL_RANGES.temperature.max}
+              {IDEAL_RANGES.temperature.unit}
+            </li>
+            <li>
+              Humedad: {IDEAL_RANGES.humidity.min}-{IDEAL_RANGES.humidity.max}
+              {IDEAL_RANGES.humidity.unit}
+            </li>
             <li>Ventilación adecuada</li>
             <li>Ciclo de luz: 12-14 horas</li>
           </ul>
