@@ -3,13 +3,13 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { MetricCard } from "@/components/metric-card";
 import { StatusCard } from "@/components/status-card";
-import { useRealtimeReadings } from "@/hooks/use-readings";
+import { useReadings } from "@/providers/readings-provider";
 import { getHabitatStatus } from "@/lib/helpers";
 import { IDEAL_RANGES } from "@/constants/ranges";
 import { DashboardSkeleton } from "@/components/skeletons/dashboard-skeleton";
 
 export function DashboardScreen() {
-  const { readings, isLoading, error } = useRealtimeReadings();
+  const { readings, isLoading, error } = useReadings();
 
   if (isLoading) return <DashboardSkeleton />;
   if (error) return <div>Error: {error.message}</div>;

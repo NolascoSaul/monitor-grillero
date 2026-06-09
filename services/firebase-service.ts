@@ -39,8 +39,8 @@ export const subscribeReadings = (
                     data
                 ).map((item) => ({
                     timestamp: new Date(item.timestamp),
-                    temperature: item.temperatura,
-                    humidity: item.humedad,
+                    temperature: item.temperature,
+                    humidity: item.humidity,
                 }));
                 callback(readings);
             } else {

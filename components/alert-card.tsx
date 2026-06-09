@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { AlertTriangle, AlertCircle, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Alert } from "@/types/habitat";
-import { formatTimeAgo } from "@/lib/mock-data";
+import { formatTimeAgo } from "@/mocks/readings";
 
 interface AlertCardProps {
   alert: Alert;

@@ -8,10 +8,10 @@ import type { Alert } from "@/types/habitat";
 
 interface AlertsScreenProps {
   alerts: Alert[];
-  onDismissAlert: (alertId: string) => void;
+  onDismiss: (id: string) => void;
 }
 
-export function AlertsScreen({ alerts, onDismissAlert }: AlertsScreenProps) {
+export function AlertsScreen({ alerts, onDismiss }: AlertsScreenProps) {
   const warningAlerts = alerts.filter(
     (a) => a.type === "warning" || a.type === "danger",
   );
@@ -67,7 +67,7 @@ export function AlertsScreen({ alerts, onDismissAlert }: AlertsScreenProps) {
               <AlertCard alert={alert} />
               <button
                 type="button"
-                onClick={() => onDismissAlert(alert.id)}
+                onClick={() => onDismiss(alert.id)}
                 className="absolute top-2 right-2 p-1.5 rounded-full bg-background/80 hover:bg-muted opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
                 aria-label="Descartar alerta"
               >
@@ -89,7 +89,7 @@ export function AlertsScreen({ alerts, onDismissAlert }: AlertsScreenProps) {
               <AlertCard alert={alert} />
               <button
                 type="button"
-                onClick={() => onDismissAlert(alert.id)}
+                onClick={() => onDismiss(alert.id)}
                 className="absolute top-2 right-2 p-1.5 rounded-full bg-background/80 hover:bg-muted opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
                 aria-label="Descartar notificacion"
               >

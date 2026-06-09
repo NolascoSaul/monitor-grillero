@@ -10,7 +10,7 @@ export interface Alert {
     title: string;
     message: string;
     hoursAgo: number;
-    metric: "temperature" | "humidity" | "general";
+    metric: "temperature" | "humidity" | "general" | "both";
 }
 
 export type HabitatStatus = "optimal" | "caution" | "alert";

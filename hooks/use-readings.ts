@@ -3,7 +3,7 @@ import type { HabitatReading } from "@/types/habitat";
 import type { ReadingState } from "@/types/firebase";
 import { subscribeReadings } from "@/services/firebase-service";
 
-export function useRealtimeReadings(): ReadingState {
+export function useReadingSubscription(): ReadingState {
     const [readings, setReadings] = useState<HabitatReading[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);

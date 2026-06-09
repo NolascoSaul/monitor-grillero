@@ -1,7 +1,7 @@
 import type { HabitatReading } from "@/types/habitat";
 export type FirebaseReading = {
-    temperatura: number;
-    humedad: number;
+    temperature: number;
+    humidity: number;
     timestamp: number;
 };
 

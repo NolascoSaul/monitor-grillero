@@ -3,10 +3,10 @@
 import { ChartCard } from "@/components/chart-card";
 import { RecentReadings } from "@/components/recent-readings";
 import { ReadingState } from "@/types/firebase";
-import { useRealtimeReadings } from "@/hooks/use-readings";
+import { useReadings } from "@/providers/readings-provider";
 
 export function HistoryScreen() {
-  const { readings, isLoading, error }: ReadingState = useRealtimeReadings();
+  const { readings, isLoading, error }: ReadingState = useReadings();
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;

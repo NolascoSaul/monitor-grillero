@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { SkeletonProvider } from "@/providers/skeleton-provider";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
+import { ReadingsProvider } from "@/providers/readings-provider";
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
@@ -35,8 +36,10 @@ export default function RootLayout({
     <html lang="es" className="bg-background">
       <body className="font-sans antialiased">
         <SkeletonProvider>
-          {children}
-          {process.env.NODE_ENV === "production" && <Analytics />}
+          <ReadingsProvider>
+            {children}
+            {process.env.NODE_ENV === "production" && <Analytics />}
+          </ReadingsProvider>
         </SkeletonProvider>
       </body>
     </html>
