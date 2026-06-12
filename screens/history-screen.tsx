@@ -1,12 +1,53 @@
 "use client";
 
+import { useRef } from "react";
+import { Button } from "@/components/ui/button";
 import { ChartCard } from "@/components/chart-card";
 import { RecentReadings } from "@/components/recent-readings";
 import { ReadingState } from "@/types/firebase";
 import { useReadings } from "@/providers/readings-provider";
+import autoTable from "jspdf-autotable";
+import jsPDF from "jspdf";
 
 export function HistoryScreen() {
   const { readings, isLoading, error }: ReadingState = useReadings();
+  const dashboardRef = useRef<HTMLDivElement>(null);
+
+  const handleDownloadPdf = async () => {
+    const pdf = new jsPDF("p", "mm", "a4");
+    const now = new Date();
+
+    // Título
+    pdf.setFontSize(16);
+    pdf.text("Reporte del Hábitat de Grillos", 105, 15, { align: "center" });
+
+    // Fecha
+    pdf.setFontSize(10);
+    pdf.text(
+      `Fecha: ${now.toLocaleDateString()} Hora: ${now.toLocaleTimeString()}`,
+      105,
+      22,
+      { align: "center" },
+    );
+
+    // Tabla de lecturas
+    const tableData = readings.map((r) => [
+      r.timestamp.toLocaleString(),
+      r.temperature,
+      r.humidity,
+    ]);
+
+    autoTable(pdf, {
+      head: [["Timestamp", "Temperatura (°C)", "Humedad (%)"]],
+      body: tableData,
+      startY: 30,
+      theme: "grid",
+      headStyles: { fillColor: [39, 135, 51] }, // verde como tu theme
+      styles: { fontSize: 10 },
+    });
+
+    pdf.save(`reporte-habitat-${Date.now()}.pdf`);
+  };
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -35,26 +76,36 @@ export function HistoryScreen() {
         </p>
       </div>
 
-      {/* Temperature Chart */}
-      <ChartCard
-        title="Temperatura"
-        data={historicalData}
-        dataKey="temperature"
-        color="#2a9d4a"
-        unit="°C"
-      />
+      <Button
+        className="w-100 flex items-center justify-center gap-2"
+        variant="default"
+        onClick={handleDownloadPdf}
+      >
+        Descargar reporte
+      </Button>
 
-      {/* Humidity Chart */}
-      <ChartCard
-        title="Humedad"
-        data={historicalData}
-        dataKey="humidity"
-        color="#d4a73a"
-        unit="%"
-      />
+      <div ref={dashboardRef}>
+        {/* Temperature Chart */}
+        <ChartCard
+          title="Temperatura"
+          data={historicalData}
+          dataKey="temperature"
+          color="#2a9d4a"
+          unit="°C"
+        />
 
-      {/* Recent Readings */}
-      <RecentReadings readings={recentReadings} />
+        {/* Humidity Chart */}
+        <ChartCard
+          title="Humedad"
+          data={historicalData}
+          dataKey="humidity"
+          color="#d4a73a"
+          unit="%"
+        />
+
+        {/* Recent Readings */}
+        <RecentReadings readings={recentReadings} />
+      </div>
     </div>
   );
 }
