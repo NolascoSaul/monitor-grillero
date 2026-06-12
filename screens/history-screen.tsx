@@ -23,12 +23,11 @@ export function HistoryScreen() {
 
     // Fecha
     pdf.setFontSize(10);
-    pdf.text(
-      `Fecha: ${now.toLocaleDateString()} Hora: ${now.toLocaleTimeString()}`,
-      105,
-      22,
-      { align: "center" },
-    );
+    pdf.text(`Fecha: ${now.toLocaleDateString()}`, 105, 22, {
+      align: "center",
+    });
+
+    pdf.text(`Hora: ${now.toLocaleTimeString()}`, 105, 27, { align: "center" });
 
     // Tabla de lecturas
     const tableData = readings.map((r) => [
@@ -38,7 +37,7 @@ export function HistoryScreen() {
     ]);
 
     autoTable(pdf, {
-      head: [["Timestamp", "Temperatura (°C)", "Humedad (%)"]],
+      head: [["Fecha de registro", "Temperatura (°C)", "Humedad (%)"]],
       body: tableData,
       startY: 30,
       theme: "grid",
