@@ -30,7 +30,8 @@ export function HistoryScreen() {
     pdf.text(`Hora: ${now.toLocaleTimeString()}`, 105, 27, { align: "center" });
 
     // Tabla de lecturas
-    const tableData = readings.map((r) => [
+    const lastReadings = readings.slice(-30).reverse();
+    const tableData = lastReadings.map((r) => [
       r.timestamp.toLocaleString(),
       r.temperature,
       r.humidity,
